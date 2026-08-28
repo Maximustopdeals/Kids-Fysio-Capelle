@@ -47,13 +47,13 @@ export const siteConfig = {
 
   /* ─── Integraties: codes hier invullen zodra ontvangen ─── */
   // Formspree formulier-ID, bijv. "abcdwxyz" (alleen het ID, niet de volledige URL)
-  formspreeFormId: "VUL_HIER_FORM_ID_IN",
+  formspreeFormId: "xqpkkyrl",
   // Google Analytics 4 measurement ID, bijv. "G-XXXXXXXXXX"
-  googleAnalyticsId: "",
+  googleAnalyticsId: "G-M22DRN64XN",
   // Google Tag Manager ID, bijv. "GTM-XXXXXXX"
-  googleTagManagerId: "",
+  googleTagManagerId: "GTM-TJ7PP5CN",
   // Google Search Console verificatiecode (alleen de content-waarde van de meta tag)
-  googleSiteVerification: "",
+  googleSiteVerification: "425UBA8tVsW_miJMQCvZnqq6kPpwsN66KaLTkedRqOM",
 } as const;
 
 export const formspreeEndpoint = `https://formspree.io/f/${siteConfig.formspreeFormId}`;
