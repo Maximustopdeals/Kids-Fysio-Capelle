@@ -11,7 +11,8 @@ function WhatsAppGlyph({ size = 30 }: { size?: number }) {
   );
 }
 
-const waLink = `${siteConfig.whatsapp}?text=${encodeURIComponent(
+// ✅ Fix: Gebruik https://wa.me/ met het nummer
+const waLink = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
   "Hallo Kids Fysio Capelle, ik heb een vraag."
 )}`;
 
