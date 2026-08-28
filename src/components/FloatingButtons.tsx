@@ -11,10 +11,36 @@ function WhatsAppGlyph({ size = 30 }: { size?: number }) {
   );
 }
 
-// ✅ Fix: Gebruik https://wa.me/ met het nummer
-const waLink = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
+const waLink = `${siteConfig.whatsapp}?text=${encodeURIComponent(
   "Hallo Kids Fysio Capelle, ik heb een vraag."
 )}`;
+
+/* Alle stijlen van deze widget staan bewust in het component zelf,
+   zodat de widget ook werkt zonder bijgewerkte globals.css. */
+const widgetCss = `
+.floating-buttons{position:fixed;right:22px;bottom:22px;z-index:2000;display:flex;flex-direction:column;align-items:center;gap:14px}
+.whatsapp-float{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:#25d366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.45);transition:transform .2s ease,box-shadow .2s ease;position:relative}
+.whatsapp-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(37,211,102,.55);animation:whatsapp-pulse 2.4s ease-out infinite}
+@keyframes whatsapp-pulse{0%{transform:scale(1);opacity:1}70%{transform:scale(1.45);opacity:0}100%{transform:scale(1.45);opacity:0}}
+.whatsapp-float:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 12px 30px rgba(37,211,102,.55)}
+.back-to-top{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;border:none;background:#1a5c47;color:#fff;cursor:pointer;box-shadow:0 8px 20px rgba(26,92,71,.35);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease,visibility .25s,background .2s ease}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.back-to-top:hover{background:#2a7d62}
+.wa-chat{position:fixed;right:22px;bottom:96px;z-index:2100;width:340px;max-width:calc(100vw - 44px);background:#fff;border-radius:18px;box-shadow:0 24px 70px rgba(13,47,38,.28);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(16px) scale(.97);transform-origin:bottom right;transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none}
+.wa-chat.open{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.wa-chat-header{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff;border-bottom:1px solid #eef2f0}
+.wa-chat-avatar{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:#25d366;color:#fff;flex-shrink:0}
+.wa-chat-title{display:flex;flex-direction:column;gap:2px;flex:1}
+.wa-chat-title strong{font-family:var(--font-nunito),"Nunito",sans-serif;font-weight:800;font-size:1rem;color:#1e2b2a;letter-spacing:.02em}
+.wa-chat-status{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:#25d366}
+.wa-chat-dot{width:8px;height:8px;border-radius:50%;background:#25d366}
+.wa-chat-close{background:none;border:none;cursor:pointer;color:#4a5f5c;padding:6px;border-radius:8px;transition:background .2s ease,color .2s ease}
+.wa-chat-close:hover{background:#f0f9f5;color:#1a5c47}
+.wa-chat-body{padding:20px 18px;background:#f7faf8}
+.wa-chat-bubble{margin:0;background:#fff;border:1px solid #e8f0ec;border-radius:14px;border-top-left-radius:4px;padding:14px 16px;font-size:.98rem;line-height:1.55;color:#1e2b2a;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.wa-chat-start{display:block;margin:0;padding:17px 20px;background:#25d366;color:#fff;text-align:center;font-family:var(--font-nunito),"Nunito",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.08em;transition:background .2s ease;text-decoration:none}
+.wa-chat-start:hover{background:#1fb857}
+`;
 
 export default function FloatingButtons() {
   const [showTop, setShowTop] = useState(false);
@@ -29,6 +55,8 @@ export default function FloatingButtons() {
 
   return (
     <>
+      <style>{widgetCss}</style>
+
       {/* WhatsApp chat-popup */}
       <div className={`wa-chat${chatOpen ? " open" : ""}`} role="dialog" aria-label="WhatsApp chat" aria-hidden={!chatOpen}>
         <div className="wa-chat-header">
