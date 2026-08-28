@@ -83,7 +83,7 @@ export default function FloatingButtons() {
         </div>
         <div className="wa-chat-body">
           <p className="wa-chat-bubble">
-            Hallo! Hoe kunnen we u helpen? Stuur ons gerust een bericht — we
+            Hallo! Hoe kunnen we u helpen? Stuur ons gerust een bericht. We
             reageren zo snel mogelijk.
           </p>
         </div>
